@@ -237,25 +237,31 @@ async function loadKmlFile(file) {
     canvas: viewer.scene.canvas
   };
   let fileURI = ""
+  let serverFileFlag = false;
+
   if(file.name === undefined){
     fileURI = "data/" + file
-  }else{
-    fileURI = "data/" + file.name;
-  }
-  let serverFileFlag = false;
-  $.get(fileURI)
-    .done(function() {
-      console.log("file server");
-      serverFileFlag = true;
+    serverFileFlag = true
       if (typeof sendCurrentFilePath === "function") {
         console.log(fileURI)
         sendCurrentFilePath(fileURI);
-        // exists code
       }
-    })
-    .fail(function() {
-      console.log("file local");
-    });
+  }else{
+    fileURI = "data/" + file.name;
+  }
+  // $.get(fileURI)
+  //   .done(function() {
+  //     console.log("file server");
+  //     serverFileFlag = true;
+  //     if (typeof sendCurrentFilePath === "function") {
+  //       console.log(fileURI)
+  //       sendCurrentFilePath(fileURI);
+  //       // exists code
+  //     }
+  //   })
+  //   .fail(function() {
+  //     console.log("file local");
+  //   });
 
   // If the file is loaded from the server, use the path instead.
   const toLoad = serverFileFlag ? fileURI : file;
