@@ -62,6 +62,18 @@
         <select id="dataset" name="dataset"></select>
         <input type="submit" id="testbtn" value="Switch Dataset">
       </form>
+      <h2>Load from server</h2>
+      <form id="fileServer" action="javascript:void(0)" onsubmit=loadKmlFile(this.serverFiles.value)>
+
+      <label title="Select the current distance function used for nearest.">
+        <select id="serverFiles" name="serverFiles">
+          <option value="2014-08-07-70.kml">2014-08-07-70.kml</option>
+          <option value="pigeonHQ.kml">pigeonHQ.kml</option>
+        </select>
+      </label>
+      <br>
+      <input type="submit">
+      </form>
 
       <h2>Load from local file system</h2>
       <form id="fileup" method="dialog" action="javascript:void(0)" onsubmit=loadKmlFile(this.myFile.files[0])>
@@ -146,8 +158,8 @@
       This panel contains further information.
     </div>
   </div>
-  <div id="nnInidcatorArrowLeft"> <img class="nnInidcatorArrowimage" src="http://maps.google.com/mapfiles/kml/shapes/arrow.png"></img></div>
-  <div id="nnInidcatorArrowRight"> <img class="nnInidcatorArrowimage" src="http://maps.google.com/mapfiles/kml/shapes/arrow.png"></img></div>
+  <div id="nnInidcatorArrowLeft"> <img class="nnInidcatorArrowimage" src="https://maps.google.com/mapfiles/kml/shapes/arrow.png"></img></div>
+  <div id="nnInidcatorArrowRight"> <img class="nnInidcatorArrowimage" src="https://maps.google.com/mapfiles/kml/shapes/arrow.png"></img></div>
 
   <div id="cesiumContainer"></div>
 

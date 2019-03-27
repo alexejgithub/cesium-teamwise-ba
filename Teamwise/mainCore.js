@@ -36,9 +36,10 @@ function createDescriptionString(data) {
 
   //qrcode stuff
   let currIP = CONFIG.wsURI.split("//")[1];
+
   currIP = currIP.split(":")[0];
-  let qrString =
-    "http%3A%2F%2F" + currIP + "%3A8080%2FTeamwise%2Fmain.html%3Fmode%3Dvr";
+  let qrString ="https%3A%2F%2Falexejgithub.github.io%2Fcesium-teamwise-ba%2FTeamwise%2Fmain.html%3Fmode%3Dvr";
+    // "http%3A%2F%2F" + currIP + "%3A8080%2FTeamwise%2Fmain.html%3Fmode%3Dvr";
   let birdQRCode =
     '<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' +
     qrString +
@@ -230,6 +231,7 @@ function createViewer(modus) {
  * @param {File} file the file to load
  */
 async function loadKmlFile(file) {
+  console.log(file)
   const options = {
     camera: viewer.scene.camera,
     canvas: viewer.scene.canvas
