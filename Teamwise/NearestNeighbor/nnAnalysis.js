@@ -110,6 +110,10 @@ function getRotationAngle(clock) {
   let currPos = currNN.position.getValue(viewer.clock.currentTime)
   let test1 = viewer.camera.viewMatrix
   let test2 = new Cesium.Cartesian3(0, 0, 0)
+  if (!Cesium.defined(test1)||!Cesium.defined(currPos)) {
+    return 0;
+  }
+
   Cesium.Matrix4.multiplyByPoint(test1, currPos, test2)
   let angleinRad = Cesium.Cartesian2.angleBetween(new Cesium.Cartesian2(0, -1), new Cesium.Cartesian2(test2.x, test2.y))
 
@@ -124,6 +128,11 @@ function getRotationAngleToCamera() {
   let currPos = currNN.position.getValue(viewer.clock.currentTime)
   let test1 = viewer.camera.viewMatrix
   let test2 = new Cesium.Cartesian3(0, 0, 0)
+  if (!Cesium.defined(test1)||!Cesium.defined(currPos)) {
+    return 0;
+  }
+
+
   Cesium.Matrix4.multiplyByPoint(test1, currPos, test2)
   Cesium.Matrix4.multiplyByScalar(test2, -1, test2)
   return Cesium.Cartesian3.angleBetween(new Cesium.Cartesian3(0, 0, -1), test2)
