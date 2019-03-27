@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Use correct character set. -->
+  <meta charset="utf-8">
+  <!-- Tell IE to use the latest, best version. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>Teamwise</title>
+  <script src="../Build/Cesium/Cesium.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src='https://cdn.jsdelivr.net/npm/webvr-polyfill@latest/build/webvr-polyfill.js'></script>
+
+
+
+  <script src="/Teamwise/Sync/js/reconnecting-websocket.js"></script>
+  <script src="/Teamwise/Sync/js/util.js"></script>
+  <script src="/Teamwise/Sync/js/Long.min.js"></script>
+  <script src="/Teamwise/Sync/js/ByteBufferAB.min.js"></script>
+  <script src="/Teamwise/Sync/js/ProtoBuf.min.js"></script>
+  <script type="text/javascript" src="../../ThirdParty/requirejs-2.1.20/require.js"></script>
+
+
+  <script type="text/javascript" src="/Teamwise/VR/mainVRbasic.js"></script>
+  <script type="text/javascript" src="/Teamwise/VR/vrGamepad.js"></script>
+
+
+  <script>
+    if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
+      throw new Error("ProtoBuf.js is not present. Please see www/index.html for manual setup instructions.");
+    }
+    // Initialize ProtoBuf.js
+    var ProtoBuf = dcodeIO.ProtoBuf;
+    var CesiumSync = ProtoBuf.loadProtoFile("/Teamwise/Sync/cesiumsync.proto").build("CesiumSync");
+  </script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <link rel="stylesheet" href="Styles/Menu.css">
+
+  <style>
+    @import url(../Build/Cesium/Widgets/widgets.css);
+      html, body, #cesiumContainer {
+          width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+      }
+  </style>
+</head>
+
+<body>
+  <div id="menu">
+    <a id="openMenuButton" onclick="toggleMenu()">&#9776;</a>
+    <div id="navbar">
+      <a onclick="toggleMenuPanel('loadPanel')">Load Data</a>
+      <a onclick="toggleMenuPanel('settingsPanel')">Settings</a>
+      <a onclick="toggleMenuPanel('aboutPanel')">About</a>
+    </div>
+    <div id="loadPanel" class="menuPanel">
+
+      Current selection
+      <form action="javascript:void(0)" onsubmit=switchDataSource(this.dataset.value)>
+        <select id="dataset" name="dataset"></select>
+        <input type="submit" id="testbtn" value="Switch Dataset">
+      </form>
+
+      <h2>Load from local file system</h2>
+      <form id="fileup" method="dialog" action="javascript:void(0)" onsubmit=loadKmlFile(this.myFile.files[0])>
+        Select a file: <input type="file" name="myFile">
+        <br>
+        <input type="submit">
+      </form>
+
+      <h2>Load from MoveBank</h2>
+      <div id="movebankLoginPanel">
+        Login data required
+        <form id="loginForm" action="javascript:void(0)">
+          <input type="text" name="username" placeholder="user name" />
+          <input type="password" name="password" placeholder="password" />
+          <input type="submit" name="submitButton" value="Login" />
+        </form>
+      </div>
+      <div id="movebankDataPanel" style="display: none">
+        Logged in as <strong id="loggedInAs"></strong>
+        <input type="button" id="logoutButton" value="Logout" />
+        <br>
+        <form id="searchForm" action="javascript:void(0)">
+          <input type="search" name="query" placeholder="study name or id">
+          <select name="filter">
+            <option value="data">studies where I can see data</option>
+            <option value="owner">studies that I am owner of</option>
+            <option value="all">all studies</option>
+          </select>
+          <input type="submit" value="Search" />
+        </form>
+        <br>
+        <form id="loadMbDataForm" action="javascript:void(0)">
+          <div id="studyListContainer" class="listContainer">
+            List of found studies:
+            <ol id="listOfStudies"></ol>
+          </div>
+          <br>
+          <div id="animalListContainer" class="listContainer">
+            Animals in this study:
+            <ol id="listOfAnimals"></ol>
+          </div>
+          <input type="submit" id="loadMbDataButton" value="load Data" disabled>
+        </form>
+      </div>
+    </div>
+    <div id="settingsPanel" class="menuPanel">
+      <h1>Settings</h1>
+      <form id="settingsForm" action="javascript:void(0)">
+        ion Key: <input type="text" name="ionKey"><br/>
+        bing Key: <input type="text" name="bingKey"><br/>
+        <input type="submit" value="Save">
+      </form>
+      <br>
+      <label title="This creates smoother animation for high frequency data but might fail on longer intervals.">
+        <input type="checkbox" id="interpolation" checked />
+        use polynomial interpolation
+      </label>
+      <h4>Nearest Neighbour Settings:</h4>
+      <div class="nnContainer w3-container">
+        <label title="Enables and disables Nearest neighbor analysis.">
+          <input type="checkbox" id="nnAnalyisisCB" checked />
+          enable nearest neighbor analyisis
+        </label>
+        <br>
+        <label title="Select the current distance function used for nearest.">
+          <select id="nnDistanceSelector">
+            <option value="1">Euclidean distance</option>
+            <option value="2">Euclidean sum distance</option>
+            <option selected="selected" value="3">Euclidean angle distance</option>
+          </select>
+        </label>
+        <br>
+        <br>
+
+        Sample interval size:
+        <input type="number" class="inputNumbers" id="nnInterval" value="1">seconds</input>
+        <button id="nnIntervalSubmit" value="Apply">Apply</button>
+      </div>
+    </div>
+    <div id="aboutPanel" class="menuPanel">
+      <h1>About</h1>
+      This panel contains further information.
+    </div>
+  </div>
+  <div id="nnInidcatorArrowLeft"> <img class="nnInidcatorArrowimage" src="http://maps.google.com/mapfiles/kml/shapes/arrow.png"></img></div>
+  <div id="nnInidcatorArrowRight"> <img class="nnInidcatorArrowimage" src="http://maps.google.com/mapfiles/kml/shapes/arrow.png"></img></div>
+
+  <div id="cesiumContainer"></div>
+
+  <script type="text/javascript" src="mainCore.js"></script>
+  <script src="Movebank/opencpu.js"></script>
+  <script src="Movebank/movebank.js"></script>
+  <script src="Menu.js"></script>
+</body>
+
+</html>

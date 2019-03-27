@@ -1,0 +1,53 @@
+
+      /*------------d3 panel sytels----------*/
+.d3panel {
+        display: inline-block;
+        position: absolute;
+        top: 200px;
+        right: var(--leftmar);
+        background: hsla(235, 5%, 50%, 0.993);
+        color: #edffff;
+        white-space: nowrap; 
+        padding: 8px;
+        border-radius: 4px;
+        min-width: 100px;
+        min-height: 10%;
+        max-width: 250px;
+        max-height: 12%;
+        opacity: 0.37;
+        filter: alpha(opacity=50);
+}
+ 
+
+.d3panel:hover {
+          opacity: 1.0;
+          filter: alpha(opacity=100); /* For IE8 and earlier */
+      } 
+         
+.chart div {
+    font: 10px sans-serif;
+    background-color: steelblue;
+    background: rgba(142, 142, 142, 0.8);
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: white;
+}
+  
+  .chartline div {
+    font: 10px sans-serif;
+    background-color: orangered;
+    background: yellow;
+    text-align: right;
+    color: white;
+}
+  
+  .hidden>div {
+      visibility:hidden;
+}
+  
+  .visible>div {
+      visibility:visible;
+}   
+  
+      /*--------d3 panel sytels --------*/

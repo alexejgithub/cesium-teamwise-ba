@@ -1,0 +1,11 @@
+message CesiumSync {
+    required int32 msgtype = 1;
+    optional string time = 2;
+    optional double multiplier = 3;
+    optional bool play = 4;
+    optional string id = 5;
+    optional string currentDsFilePath =6;
+    optional string nnID= 7;
+    optional string nnOnOff = 8;
+
+}
