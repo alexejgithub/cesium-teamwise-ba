@@ -2,7 +2,7 @@
 /*exported loadKmlFile switchDataSource*/
 
 /** The reference to the bird model. */
-const modelURI = "/Teamwise/models/storch_model_2017__1_7lq90.glb";
+const modelURI = "models/storch_model_2017__1_7lq90.glb";
 
 /** Will hold environment variables like keys, IP address, etc. */
 const CONFIG = {};
@@ -130,7 +130,7 @@ function startup() {
         fixed: true
       };
 
-      $.getJSON("/Teamwise/Sync/web-config.json", data => {
+      $.getJSON("Sync/web-config.json", data => {
         // Copy entries of the loaded config into the CONFIG object.
         // Note: No simple assignment to keep the object `const`.
         for (const prop in data) {
@@ -158,13 +158,13 @@ function startup() {
   startupTasks.push(
     new Promise(resolve => {
       // When the loading of the script finished, jquery resolves the promise.
-      $.getScript("/Teamwise/NearestNeighbor/nnAnalysis.js", resolve);
+      $.getScript("NearestNeighbor/nnAnalysis.js", resolve);
     })
   );
   startupTasks.push(
     new Promise(resolve => {
       // When the loading of the script finished, jquery resolves the promise.
-      $.getScript("/Teamwise/NearestNeighbor/distanceFunctions.js", resolve);
+      $.getScript("NearestNeighbor/distanceFunctions.js", resolve);
     })
   );
 
@@ -297,5 +297,5 @@ function switchDataSource(entityCollectionId) {
 if (typeof Cesium !== "undefined") {
   startup();
 } else if (typeof require === "function") {
-  require(["../Build/Cesium/Cesium"], startup);
+  require(["/cesium-teamwise-ba/Build/Cesium/Cesium"], startup);
 }
