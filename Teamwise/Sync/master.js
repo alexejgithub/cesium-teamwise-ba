@@ -116,7 +116,7 @@ function initSyncMode() {
 
     const clockViewModel = new Cesium.ClockViewModel(viewer.clock);
     const animationViewModel = new Cesium.AnimationViewModel(clockViewModel);
-
+    console.log(CONFIG.wsURI)
     ws = new ReconnectingWebSocket(CONFIG.wsURI, null, {
         binaryType: "arraybuffer"
     });
