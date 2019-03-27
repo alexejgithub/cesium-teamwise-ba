@@ -234,7 +234,7 @@ async function loadKmlFile(file) {
     camera: viewer.scene.camera,
     canvas: viewer.scene.canvas
   };
-  const fileURI = "/Teamwise/data/" + file.name;
+  const fileURI = "data/" + file.name;
   let serverFileFlag = false;
   $.get(fileURI)
     .done(function() {
