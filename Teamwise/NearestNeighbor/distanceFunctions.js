@@ -23,6 +23,10 @@ entityDistanceEuclideanSum = function (e1, e2, startTime, currTime,stepSize) {
 
 
 entityAngleDistance = function (e1, e2, startTime, currTime,stepSize) {
+  if(!Cesium.defined(e2.position.getValue(currTime))||!Cesium.defined(e1.position.getValue(currTime))){
+    return 1000
+  }
+  
   let euclDist = entityDistanceEuclideanSum(e1, e2, startTime, currTime,stepSize)
   const e1Orientation = Cesium.Cartesian3.fromCartesian4(e1.orientation.getValue(currTime))
   const e2Orientation = Cesium.Cartesian3.fromCartesian4(e2.orientation.getValue(currTime))
