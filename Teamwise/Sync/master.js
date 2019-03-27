@@ -53,92 +53,15 @@ function initSyncMode() {
     let multMaster = 1; //the multiplier must not be undefined
     let toggleTimedSync = true;
 
-    // const SYNC = 0;
-    // const ASYNC = 1;
-    // const TESTING = 2;
-
-    // //Switch between Synchronisation modes.
-    // function getSyncStatus(keyCode) {
-    //     switch (keyCode) {
-    //         case "A".charCodeAt(0):
-    //             return ASYNC;
-    //         case "F".charCodeAt(0):
-    //             return SYNC;
-    //         case "T".charCodeAt(0):
-    //             return TESTING;
-    //         default:
-    //             return undefined;
-    //     }
-    // }
-
-    // document.addEventListener("keydown", function (e) {
-    //     const status = getSyncStatus(e.keyCode);
-
-    //     if (typeof status !== "undefined") {
-    //         switch (status) {
-    //             case SYNC:
-    //                 toggleTimedSync = true;
-    //                 handleSetTime();
-    //                 break;
-    //             case ASYNC:
-    //                 toggleTimedSync = false;
-    //                 break;
-    //             case TESTING:
-    //                 console.log("Hello you are testing!!!");
-    //                 sendSelctID("TEST ID");
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-    //     } else {
-    //         console.log("the key pressed has no binding in Sync/master.js");
-    //     }
-
-
-
-
-
-    //     if (typeof synced !== "undefined") {
-    //         toggleTimedSync = synced;
-    //         console.log(toggleTimedSync);
-    //         if (toggleTimedSync) {
-    //             handleSetTime();
-    //         }
-    //     }
-    // }, false);
-
-
-    //Cesium.BingMapsApi.defaultKey = CONFIG.BingMapsKey;
-
-
 
 
 
     const clockViewModel = new Cesium.ClockViewModel(viewer.clock);
     const animationViewModel = new Cesium.AnimationViewModel(clockViewModel);
-    console.log(CONFIG.wsURI)
     ws = new ReconnectingWebSocket(CONFIG.wsURI, null, {
         binaryType: "arraybuffer"
     });
-    // ws.onopen = function () {
-
-    //     ws.onmessage = function (evt) {
-
-
-    //         try {
-    //             // Decode the Message
-    //             const sync = CesiumSync.decode(evt.data);
-    //             console.log("Message-Type: State Update");
-    //             //handleStateChange(sync);
-
-    //         } catch (err) {
-    //             console.log("Error: " + err);
-    //         }
-    //     };
-
-    // };
-
-
+   
 
 
 
