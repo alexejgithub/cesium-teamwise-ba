@@ -236,7 +236,12 @@ async function loadKmlFile(file) {
     camera: viewer.scene.camera,
     canvas: viewer.scene.canvas
   };
-  const fileURI = "data/" + file.name;
+  let fileURI = ""
+  if(file.name === undefined){
+    fileURI = "data/" + file
+  }else{
+    fileURI = "data/" + file.name;
+  }
   let serverFileFlag = false;
   $.get(fileURI)
     .done(function() {
