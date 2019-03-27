@@ -149,7 +149,7 @@ function nnOnTickCallback(clock) {
   }
   if (Cesium.defined(viewer.dataSources.get(0))) {
     let entities = viewer.dataSources.get(0).entities.values
-    if(length(entities)<1){
+    if(entities.length<1){
       return 
     }
     $(".nnInidcatorArrowimage").css('transform', 'rotateZ(' + getRotationAngle(clock) + 'rad)');
