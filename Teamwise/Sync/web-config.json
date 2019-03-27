@@ -1,5 +1,5 @@
 {
-    "wsURI": "ws://blooming-anchorage-15820.herokuapp.com",
+    "wsURI": "wss://blooming-anchorage-15820.herokuapp.com",
     "camSigFigures": 10e6,
     "BingMapsKey": "AhFt49yK1ighn5cAHCXmZAnuQ6WeQTlVTB-EAYklwoONbHHZUrhDtNS5RSm-Xi8h",
     "IonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3NWY5Yjc3YS1lZDAxLTQ3ZTctYjJlYS1lM2RjZTAzODIzN2IiLCJpZCI6NDg1MCwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTU0MTc1NDA1N30.yIgpwTLcZC0LVd-SsJAPA1w80PWgxDs9LramGZZM1GA",
