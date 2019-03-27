@@ -145,10 +145,10 @@ function startup() {
   startupTasks.push(
     new Promise(resolve => {
       if (modus === "vr") {
-        $.getScript("/Teamwise/Sync/slave.js", resolve);
+        $.getScript("Sync/slave.js", resolve);
       } else {
         // When the loading of the script finished, jquery resolves the promise.
-        $.getScript("/Teamwise/Sync/" + modus + ".js", resolve);
+        $.getScript("Sync/" + modus + ".js", resolve);
         // The VR instance is always a slave
       }
     })
