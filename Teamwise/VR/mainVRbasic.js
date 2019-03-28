@@ -3,7 +3,7 @@
  */
 
 
-let frameData = new VRFrameData()
+let frameData
 
 let vrGamepadCont;
 
@@ -86,6 +86,8 @@ function getPhoneTransform(position, entities, time) {
 }
 // the main function to control the character
 initVR = function (viewer) {
+    frameData = new VRFrameData()
+
     navigator.getVRDisplays().then(function (displays) {
         if (displays.length > 0) {
             vrDisplay = displays[0];
